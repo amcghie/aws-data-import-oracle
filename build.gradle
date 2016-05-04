@@ -1,0 +1,37 @@
+group 'uk.co.think-designs'
+version '1.0'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    slf4jVersion = '1.7.21'
+}
+
+dependencies {
+    compile files('lib/ojdbc6.jar')
+    compile "org.slf4j:slf4j-api:$slf4jVersion",
+            "org.slf4j:slf4j-simple:$slf4jVersion"
+
+    testCompile "junit:junit:$junitVersion",
+                "org.mockito:mockito-core:$mockitoVersion"
+}
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Version': version,
+                'Main-Class': 'uk.co.thinkdesigns.aws.oracle.OracleFileUpload'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
