@@ -2,8 +2,8 @@ package uk.co.thinkdesigns.aws.oracle;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
-import uk.co.thinkdesigns.aws.oracle.OracleFileUpload;
 
 import java.io.ByteArrayInputStream;
 import java.sql.*;
@@ -11,6 +11,7 @@ import java.sql.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
+@Ignore
 public class OracleFileUploadIntegrationTest {
 
     private static final String FILENAME = "helloWorld.txt";
@@ -27,10 +28,12 @@ public class OracleFileUploadIntegrationTest {
 
     @AfterClass
     public static void closeConnection() throws SQLException {
-        CallableStatement statement = connection.prepareCall("BEGIN utl_file.fremove('DATA_PUMP_DIR',:filename); END;");
-        statement.setString("filename", FILENAME);
-        statement.execute();
-        connection.close();
+        if (connection != null) {
+            CallableStatement statement = connection.prepareCall("BEGIN utl_file.fremove('DATA_PUMP_DIR',:filename); END;");
+            statement.setString("filename", FILENAME);
+            statement.execute();
+            connection.close();
+        }
     }
 
     @Test
