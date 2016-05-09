@@ -1,7 +1,6 @@
 package uk.co.thinkdesigns.aws.oracle;
 
 import org.junit.Test;
-import uk.co.thinkdesigns.aws.oracle.OracleFileUpload;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -46,7 +45,7 @@ public class OracleFileUploadTest {
     }
 
     @Test
-    public void testName() throws Exception {
+    public void successfulUpload() throws Exception {
         when(connection.prepareCall(anyString()))
                 .thenReturn(openFileStatement)
                 .thenReturn(writeFileStatement)

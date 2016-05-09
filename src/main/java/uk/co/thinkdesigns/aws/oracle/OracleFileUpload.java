@@ -67,9 +67,9 @@ public class OracleFileUpload {
     }
 
     public static void showUsage() {
-        System.out.println("Usage:");
-        System.out.println(OracleFileUpload.class.getSimpleName() + " <url> <username> <password> <filePath>");
-        System.out.println("For example:");
-        System.out.println(OracleFileUpload.class.getSimpleName() + " localhost:1521:orcl hybris_import imp0rt /tmp/data.dmp");
+        System.out.println("\nUsage:");
+        System.out.println(OracleFileUpload.class.getName() + " <url> <username> <password> <filePath>");
+        System.out.println("\nFor example:");
+        System.out.println(OracleFileUpload.class.getName() + " localhost:1521:orcl hybris_import imp0rt /tmp/data.dmp");
     }
 }
